@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
-import graphene
+#import graphene
 import argparse
 import pprint
 import requests
+import icdcQueries as icdc
+#import json
 
 def runQuery(url,query):
   request = requests.post(url, json={'query':query})
@@ -53,10 +55,13 @@ def main(args):
     if args.verbose:
         pprint.pprint(args.tier)
         pprint.pprint(tier[args.tier])
-
-    data = runQuery(tier[args.tier], schemaquery)
+    icdc.init()
+    if args.verbose:
+        pprint.pprint(icdc.sbg_single_case)
+    data = runQuery(tier[args.tier], icdc.sbg_single_case)
+    #data = runQuery(tier[args.tier], schemaquery)
     pprint.pprint(data)
-    parseSchema(data)
+    #parseSchema(data)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
