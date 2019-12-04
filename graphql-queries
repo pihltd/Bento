@@ -1,0 +1,103 @@
+All available types
+# https://moonhighway.com/five-introspection-queries/
+{
+      __schema{
+        types{
+          name
+          kind
+          description
+        }
+      }
+    }
+
+All available queries
+#https://moonhighway.com/five-introspection-queries/
+{
+  __schema{
+    queryType{
+      fields{
+        name
+        description
+      }
+    }
+  }
+}
+
+Individual type details
+#https://moonhighway.com/five-introspection-queries/
+{
+  __type(name: "case") {
+    fields{
+      name
+      description
+    }
+  }
+}
+
+Enumerator values
+#https://moonhighway.com/five-introspection-queries/
+{
+  __type(name: "CaseOverview") {
+    kind
+    name
+    description
+    enumValues{
+      name
+      description
+    }
+  }
+}
+
+In progress stuff
+{
+  __type(name:"file"){
+    name
+    fields{
+      name
+      type{
+        name
+        kind
+      }
+    }
+  }
+}
+
+{
+  file{
+    file_name
+    file_size
+    file_format
+    file_status
+    file_locations
+    file_description
+    md5sum
+    uuid
+    studies {
+      _id
+      clinical_study_description
+      clinical_study_designation
+      clinical_study_id
+      clinical_study_name
+      clinical_study_type
+      date_of_iacuc_approval
+      dates_of_conduct
+    }
+  }
+}
+
+{
+  caseOverview {
+    _id
+    age
+    breed
+    case_id
+    diagnosis
+    disease_site
+    neutered_status
+    program
+    sex
+    stage_of_disease
+    study_code
+    study_type
+  }
+}
