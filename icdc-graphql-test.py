@@ -83,7 +83,8 @@ def writeJSON(jsondata, filename):
 def main(args):
     tier = { "stage" : "https://caninecommons-stage.cancer.gov/v1/graphql/",
     "qa" : "https://caninecommons-qa.cancer.gov/v1/graphql/",
-    "dev" : "https://caninecommons-dev.cancer.gov/v1/graphql/"}
+    "dev" : "https://caninecommons-dev.cancer.gov/v1/graphql/",
+    "prod" : "https://caninecommons.cancer.gov/v1/graphql/"}
     query = ""
 
     if args.veryverbose:
@@ -91,7 +92,10 @@ def main(args):
         pprint.pprint(tier[args.tier])
     icdc.init()
     if args.qa:
-        query = icdc.sbg_single_case
+        if args.tier == 'prod':
+            query = idc.prod_sbg_single_case
+        else:
+            query = icdc.sbg_single_case
     else:
         query = icdc.sbg_all_cases
     if args.veryverbose:
@@ -115,8 +119,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--verbose", action = "store_true", help = "Enable verbose errors")
     parser.add_argument("-vv", "--veryverbose",action = "store_true", help = "Enable insane verbosity")
-    tiers = ["stage", "qa", "dev"]
-    parser.add_argument("-t", "--tier", required = True, type = str.lower, choices = tiers, help = "Allowed values stage, qa, dev")
+    tiers = ["stage", "qa", "dev", "prod"]
+    parser.add_argument("-t", "--tier", required = True, type = str.lower, choices = tiers, help = "Allowed values prod, stage, qa, dev")
     parser.add_argument("-q", "--qa", action = "store_true", help = "Use test query")
     types = ["yaml", "csv","json"]
     parser.add_argument("-o", "--outputtype", help = "Output file type, Allowed values yaml, json, csv")
