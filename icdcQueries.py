@@ -26,7 +26,7 @@ def init():
 
     global sbg_single_case
     sbg_single_case = """{
-      case(case_id: "NCATS01CCB030162"){
+      case(case_id:NCATS01CCB030162'){
         case_id
         cohort{
           cohort_description
@@ -142,9 +142,10 @@ def init():
       }
     }"""
 
+#https://gist.github.com/gbaman/b3137e18c739e0cf98539bf4ec4366ad
     global prod_sbg_single_case
-    prod_sbg_single_case = """{
-      case(case_id: "NCATS-COP01CCB080018"){
+    prod_sbg_single_case = ''' query($case: String!) {
+      case(case_id: $case){
         case_id
         cohort{
           cohort_description
@@ -159,20 +160,20 @@ def init():
         }
         demographic{
           breed
-          weight
-          sex
+         weight
+         sex
           neutered_indicator
           patient_age_at_enrollment
         }
         diagnoses{
           disease_term
           stage_of_disease
-          primary_disease_site
+         primary_disease_site
           concurrent_disease
           concurrent_disease_type
         }
         visits{
-          visit_date
+          visit_date'
           visit_number
           physical_exams{
             day_in_cycle
@@ -181,7 +182,7 @@ def init():
         samples{
           sample_id
           sample_type
-          general_sample_pathology
+         general_sample_pathology
           date_of_sample_collection
           necropsy_sample
           percentage_tumor
@@ -199,4 +200,4 @@ def init():
           }
         }
       }
-    }"""
+    } '''
