@@ -8,12 +8,15 @@ import yaml
 import json
 from pandas.io.json import json_normalize
 import pandas as pd
+import sys
 
-def runQuery(url,query):
-  request = requests.post(url, json={'query':query})
-  if request.status_code == 200:
+def runQuery(url,query, variables):
+
+    request = requests.post(url, json={'query': query, 'variables':variables})
+
+    if request.status_code == 200:
       return request.json()
-  else:
+    else:
       raise Exception ("Query failed code {}. {}".format(request.status_code,query))
 
 def parseSchema(jsondata):
@@ -81,26 +84,35 @@ def writeJSON(jsondata, filename):
 
 
 def main(args):
-    tier = { "stage" : "https://caninecommons-stage.cancer.gov/v1/graphql/",
+    tiers = { "stage" : "https://caninecommons-stage.cancer.gov/v1/graphql/",
     "qa" : "https://caninecommons-qa.cancer.gov/v1/graphql/",
     "dev" : "https://caninecommons-dev.cancer.gov/v1/graphql/",
     "prod" : "https://caninecommons.cancer.gov/v1/graphql/"}
     query = ""
 
+    if args.tier is None:
+        tier = tiers['prod']
+    else:
+        tier = tiers[args.tier]
+
     if args.veryverbose:
         pprint.pprint(args.tier)
-        pprint.pprint(tier[args.tier])
+        pprint.pprint(tiers[args.tier])
     icdc.init()
-    if args.qa:
-        if args.tier == 'prod':
-            query = idc.prod_sbg_single_case
-        else:
-            query = icdc.sbg_single_case
-    else:
-        query = icdc.sbg_all_cases
+    #if args.qa:
+    #    if tier == tiers['prod']:
+    #        query = icdc.prod_sbg_single_case
+    #    else:
+    #        query = icdc.sbg_single_case
+    query = icdc.prod_sbg_single_case
+    #else:
+    #    query = icdc.sbg_all_cases
     if args.veryverbose:
+        pprint.pprint(args.case)
         pprint.pprint(query)
-    data = runQuery(tier[args.tier], query)
+
+    variables = {"case":args.case}
+    data = runQuery(tier, query, variables)
     if args.veryverbose:
         pprint.pprint(data)
 
@@ -118,13 +130,14 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--verbose", action = "store_true", help = "Enable verbose errors")
-    parser.add_argument("-vv", "--veryverbose",action = "store_true", help = "Enable insane verbosity")
+    parser.add_argument("-b", "--veryverbose",action = "store_true", help = "Enable insane verbosity")
     tiers = ["stage", "qa", "dev", "prod"]
-    parser.add_argument("-t", "--tier", required = True, type = str.lower, choices = tiers, help = "Allowed values prod, stage, qa, dev")
+    parser.add_argument("-t", "--tier", type = str.lower, choices = tiers, help = "Allowed values prod, stage, qa, dev")
     parser.add_argument("-q", "--qa", action = "store_true", help = "Use test query")
     types = ["yaml", "csv","json"]
     parser.add_argument("-o", "--outputtype", help = "Output file type, Allowed values yaml, json, csv")
     parser.add_argument("-f", "--filename", help = "Filename for output")
+    parser.add_argument("-c", "--case", help = "Case ID to search for")
 
     args = parser.parse_args()
     main(args)
