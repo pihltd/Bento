@@ -240,3 +240,16 @@ def init():
     }
   }
 }'''
+
+    global table_demo
+    table_demo = '''{
+case{
+  case_id
+  demographic{
+    breed
+    weight
+    sex
+    patient_age_at_enrollment
+  }
+ }
+}'''
