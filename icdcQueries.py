@@ -201,3 +201,42 @@ def init():
         }
       }
     } '''
+
+    global demo_query
+    demo_query = '''{
+  case{
+    case_id
+    cohort{
+      cohort_description
+      cohort_dose
+    }
+    demographic{
+      breed
+      weight
+      sex
+      neutered_indicator
+      patient_age_at_enrollment
+    }
+    diagnoses{
+      disease_term
+      stage_of_disease
+      primary_disease_site
+      concurrent_disease
+      concurrent_disease_type
+    }
+    visits{
+      visit_date
+      visit_number
+    }
+    samples{
+      sample_id
+      sample_type
+      general_sample_pathology
+      date_of_sample_collection
+      necropsy_sample
+      percentage_tumor
+      percentage_stroma
+      comment
+    }
+  }
+}'''
