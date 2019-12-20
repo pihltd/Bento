@@ -1,0 +1,85 @@
+{
+  "extensions": {
+    "type": "READ_ONLY"
+  },
+  "data": {
+    "case": [
+      {
+        "visits": [],
+        "case_id": "NCATS01CCB030162",
+        "cohort": {
+          "cohort_description": "Patients with Melanoma",
+          "cohort_dose": "",
+          "study_arm": {
+            "study": {
+              "clinical_study_designation": "NCATS01",
+              "clinical_study_name": "Models for diagnosis and treatment of human cancers using comparative canine-human transcriptomics"
+            },
+            "arm": "transcriptomics and proteomics analysis 1"
+          }
+        },
+        "diagnoses": [
+          {
+            "stage_of_disease": null,
+            "concurrent_disease": false,
+            "disease_term": "Lip and oropharyngeal neoplasms malignant :: Melanoma-lingual",
+            "concurrent_disease_type": "",
+            "primary_disease_site": "Mouth"
+          }
+        ],
+        "samples": [
+          {
+            "necropsy_sample": false,
+            "date_of_sample_collection": "20090601",
+            "sample_id": "CCB030162 0103",
+            "files": [
+              {
+                "file_name": "30162_MEL_1_S38_L005_R2_001.fastq.gz",
+                "file_type": "Sequence File",
+                "md5sum": "a77502c9a96b9508b3161f28c657c313",
+                "file_locations": "s3://nci-cbiit-caninedatacommons-file/Final/NCATS/NCATS01/Sequence-files/30162_MEL_1_S38_L005_R2_001.fastq.gz",
+                "file_description": "",
+                "uuid": "2ce7f358-143d-50a9-bfc3-0ba6fd350082",
+                "file_format": "gz",
+                "file_size": 1471584038
+              },
+              {
+                "file_name": "30162_MEL_1_S38_L005_R1_001.fastq.gz",
+                "file_type": "Sequence File",
+                "md5sum": "ff263e336eb7d7c7d6583aa5d7cf3957",
+                "file_locations": "s3://nci-cbiit-caninedatacommons-file/Final/NCATS/NCATS01/Sequence-files/30162_MEL_1_S38_L005_R1_001.fastq.gz",
+                "file_description": "",
+                "uuid": "37e55a67-7928-5847-966e-3788eb6fae40",
+                "file_format": "gz",
+                "file_size": 1574129838
+              }
+            ],
+            "general_sample_pathology": "tumor",
+            "comment": "",
+            "sample_type": "tissue",
+            "percentage_tumor": 94.5,
+            "percentage_stroma": 5.5
+          },
+          {
+            "necropsy_sample": false,
+            "date_of_sample_collection": "20090601",
+            "sample_id": "CCB030162 0311",
+            "files": [],
+            "general_sample_pathology": "",
+            "comment": "",
+            "sample_type": "blood",
+            "percentage_tumor": null,
+            "percentage_stroma": null
+          }
+        ],
+        "demographic": {
+          "neutered_indicator": "Yes",
+          "patient_age_at_enrollment": 12,
+          "sex": "Female",
+          "weight": "30",
+          "breed": "Mixed Breed"
+        }
+      }
+    ]
+  }
+}
